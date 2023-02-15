@@ -13,4 +13,10 @@ class Absensi extends Model
     public function jabatan(){
         return $this->belongsTo(Jabatan::class);
        }
+       public function user(){
+        return $this->belongsTo(User::class);
+    }
+       public function kehadiran(){
+        return $this->hasMany(Kehadiran::class);
+    }
 }

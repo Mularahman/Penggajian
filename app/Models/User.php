@@ -28,7 +28,7 @@ class User extends Authenticatable
         return $this->belongsTo(Jabatan::class);
        }
        public function absensi(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(Absensi::class);
     }
     /**
      * The attributes that should be hidden for serialization.

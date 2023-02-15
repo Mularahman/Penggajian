@@ -12,4 +12,10 @@ class Kehadiran extends Model
     public function user(){
         return $this->hasMany(User::class);
     }
+    public function absensi(){
+        return $this->belongsTo(Absensi::class);
+    }
+    public function potongan(){
+        return $this->belongsTo(Potongan::class);
+    }
 }

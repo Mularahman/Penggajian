@@ -6,9 +6,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data Absensi</li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data Gaji</li>
                 </ol>
-                <h6 class="font-weight-bolder text-white mb-0">Data Absensi</h6>
+                <h6 class="font-weight-bolder text-white mb-0">Data Gaji</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-6">
                             <p for="example-month-input"
-                                class=" text-uppercase text-secondary  font-weight-bolder opacity-30">Filter Data Absensi
+                                class=" text-uppercase text-secondary  font-weight-bolder opacity-30">Filter Data Gaji
                                 Pegawai</p>
                         </div>
                         <div class="col">
@@ -128,16 +128,21 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Nama Pegawai
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Jenis Kelamin</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Jabatan</th>
-                                    @foreach ($potongan as $p)
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            {{ $p->nama_potongan }}</th>
-                                    @endforeach
+
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Gaji Pokok</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Tj. Transport</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Uang Makan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Potongan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Total Gaji</th>
 
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -147,7 +152,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($user as $item)
-                                <tr>
+                                    <tr>
 
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p>
@@ -161,54 +166,51 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
 
                                         </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jenis_kelamin }}</p>
 
-                                        </td>
+
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->nama_jabatan }}</p>
 
                                         </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->gaji_pokok }}</p>
 
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->tj_transport }}</p>
 
-                                            @forelse ($item->absensi as $absensi)
-                                            @forelse ($absensi->kehadiran as $kehadiran)
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0"> {{ $kehadiran->jumlah }}</p>
-                                            </td>
-                                            @empty
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->uang_makan }}</p>
 
-                                            @for ($i=1; $i<=count($potongan); $i++)
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0"> 0</p>
-                                            </td>
-                                            @endfor
-
-                                            @endforelse
-                                            @empty
-                                            @for ($i=1; $i<=count($potongan); $i++)
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0"> 0</p>
-                                            </td>
-                                            @endfor
-
-                                            @endforelse
+                                        </td>
 
 
 
+                                        @foreach ($item->absensi as $kehadiran)
+                                            @foreach ($kehadiran->kehadiran as $hadir)
 
 
 
+                                                <td class="align-middle text-center text-sm">
+                                                    <span
+                                                        class="badge badge-sm bg-gradient-danger">
 
-                                        {{--  <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>  --}}
+                                                        {{ $hadir->sum('jumlah') * $hadir->potongan->sum('jumlah_potongan') }} </span>
+                                                </td>
+
+                                            @endforeach
+                                        @endforeach
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                                        </td>
                                         <td class="align-middle text-center  justify-content-center d-flex">
                                             <!-- Button trigger modal -->
-                                            <a class="btn bg-gradient-primary me-md-1" href="/tambah_absensi/{{$item->id}}">
+                                            <a class="btn bg-gradient-primary me-md-1"
+                                                href="/lihat_gaji/{{ $item->id }}">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <!-- Button trigger modal -->
+                                            {{--  <!-- Button trigger modal -->
                                             <button type="button" class="btn bg-gradient-info me-md-1"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $item->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -237,10 +239,10 @@
                                                 <div class="modal fade" id="exampleModal2{{ $item->id }}"
                                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
-                                                    @include('admin.data_absensi.hapus')
+                                                    @include('admin.data_absensi.hapus')  --}}
                                         </td>
                                     </tr>
-                                    @endforeach
+                                @endforeach
 
 
                             </tbody>

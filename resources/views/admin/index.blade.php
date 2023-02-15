@@ -19,12 +19,18 @@ data-scroll="false">
         </div>
         <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
+
                 <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+
+                    <span class="d-sm-inline d-none me-sm-2">Hi, {{auth()->user()->name}}</span>
                     <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none">Sign In</span>
+
                 </a>
+
             </li>
+
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+
                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                     <div class="sidenav-toggler-inner">
                         <i class="sidenav-toggler-line bg-white"></i>
@@ -40,6 +46,7 @@ data-scroll="false">
             </li>
 
         </ul>
+        
     </div>
 </div>
 </nav>
@@ -173,7 +180,7 @@ data-scroll="false">
             <div class="card-body p-3">
               <div class="chart">
                 <canvas id="pie-chart" class="chart-canvas" height="300px">
-                    
+
                 </canvas>
               </div>
             </div>

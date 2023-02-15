@@ -6,7 +6,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data Absensi</li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">Data Absensi</a></li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Data Absensi</li>
                 </ol>
                 <h6 class="font-weight-bolder text-white mb-0">Tambah Data Absensi</h6>
             </nav>
@@ -18,10 +19,14 @@
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
+
                         <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+
+                            <span class="d-sm-inline d-none me-sm-2">Hi, {{auth()->user()->name}}</span>
                             <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Sign In</span>
+
                         </a>
+
                     </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
@@ -69,7 +74,7 @@
                     </div>
 
 
-                    <form action="/tambahabsensi" method="post">
+                    <form action="/tambahabsensi/{{$id}}" method="post">
                         @csrf
 
                         <div class="px-4 py-4 pt-0">
@@ -145,7 +150,7 @@
                                                                 {{--  <div class="input-group mb-3">  --}}
 
                                                                 <input type="number" class="form-control"
-                                                                    style="width: 80px;" name="a[][{{$item->id}}][{{$p->id}}]"
+                                                                    style="width: 80px;" name="a[][{{$p->id}}]"
                                                                     aria-label="Example text with button addon"
                                                                     aria-describedby="button-addon1">
 

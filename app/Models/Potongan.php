@@ -9,4 +9,8 @@ class Potongan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function kehadiran(){
+        return $this->hasOne(Kehadiran::class);
+    }
 }
