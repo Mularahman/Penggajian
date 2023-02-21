@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PotonganController;
 use App\Http\Controllers\TunjanganController;
@@ -71,5 +72,20 @@ Route::group(['middleware' => ['auth','admin']], function(){
     Route::get('/tambah_gaji/{id}/{bulan}', [GajiController::class, 'tambah']);
     Route::post('/tambah_gaji/{id}', [GajiController::class, 'store']);
     Route::get('/lihat_gaji/{id}/{bulan}', [GajiController::class, 'lihat']);
+
+    Route::get('/laporan_pegawai', [LaporanController::class, 'pegawai']);
+    Route::get('/laporan_pegawai_cetak', [LaporanController::class, 'cetak_pegawai']);
+
+    Route::get('/laporan_gaji', [LaporanController::class, 'gaji']);
+    Route::post('/laporan_gajii', [LaporanController::class, 'filter_gaji']);
+    Route::get('/laporan_gaji_cetak/{bulan}', [LaporanController::class, 'cetak_gaji']);
+
+    Route::get('/laporan_absensi', [LaporanController::class, 'absensi']);
+    Route::post('/laporan_absensii', [LaporanController::class, 'filter_absensi']);
+    Route::get('/laporan_absensi_cetak/{bulan}', [LaporanController::class, 'cetak_absensi']);
+
+    Route::get('/laporan_slipgaji', [LaporanController::class, 'pilihpegawai']);
+    Route::post('/laporan_slipgajii', [LaporanController::class, 'slipgaji']);
+    Route::get('/laporan_slipgaji_cetak/{id}/{bulan}', [LaporanController::class, 'cetak_slipgaji']);
 
 });

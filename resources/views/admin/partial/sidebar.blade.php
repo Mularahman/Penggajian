@@ -89,10 +89,19 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link " href="/laporan_pegawai">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md opacity-10 text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"/></svg>
+                        </div>
+                        <span class="nav-link-text ms-1">Laporan Pegawai</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link " href="/laporan_gaji">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+                            <i class="ni ni-single-copy-04 text-info text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Laporan Gaji</span>
                     </a>
@@ -108,7 +117,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/slip_gaji">
+                    <a class="nav-link " href="/laporan_slipgaji">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
@@ -117,7 +126,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/grafik">
+                    <a class="nav-link " href="laporan_grafik">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 

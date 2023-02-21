@@ -153,7 +153,7 @@
                                                                     style="width: 80px;" name="a[][{{$p->id}}]"
                                                                     aria-label="Example text with button addon"
                                                                     aria-describedby="button-addon1"
-                                                                    
+                                                                    value="0"
                                                                     >
 
                                                                 {{--  </div>  --}}

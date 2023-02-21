@@ -62,12 +62,12 @@
                         </div>
                         <div class="col">
 
-                            <form action="/data_absensii" method="post">
+                            <form action="/laporan_absensii" method="post">
                                 @csrf
 
                                 <div class="form-group">
 
-                                    <input class="form-control" type="month" name="bulan" value="{{$bulan}}"
+                                    <input class="form-control" type="month" name="bulan" value="{{ date('Y') . '-' . date('m') }}"
                                         id="example-month-input">
                                 </div>
                             </div>
@@ -92,10 +92,9 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col">
-                            {{--  <!-- Button trigger modal -->
-                        <a  class="btn bg-gradient-primary"   href="/tambah_absensi">
-                        Tambah Data
-                        </a>  --}}
+                            <a  class="btn bg-gradient-primary" href="/laporan_absensi_cetak/{{$bulan}}">
+                                Download
+                                </a>
                         </div>
                         <div class="col">
 
@@ -131,7 +130,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Jenis Kelamin</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Jabatan</th>
                                     @foreach ($potongan as $p)
                                         <th
@@ -139,9 +138,7 @@
                                             {{ $p->nama_potongan }}</th>
                                     @endforeach
 
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
+
 
                                 </tr>
                             </thead>
@@ -171,16 +168,17 @@
                                         </td>
 
 
-                                            @forelse ($item->absensi->where('bulan', $bulan)  as $absensi)
+                                            @forelse ($item->absensi->where('bulan', $bulan) as $absensi)
+
                                             @forelse ($absensi->kehadiran->where('bulan', $bulan) as $kehadiran)
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0"> {{ $kehadiran->jumlah }}</p>
+                                                <p class="text-center text-xs font-weight-bold mb-0"> {{ $kehadiran->jumlah }}</p>
                                             </td>
                                             @empty
 
                                             @for ($i=1; $i<=count($potongan); $i++)
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0"> 0</p>
+                                                <p class="text-center text-xs font-weight-bold mb-0"> 0</p>
                                             </td>
                                             @endfor
 
@@ -188,7 +186,7 @@
                                             @empty
                                             @for ($i=1; $i<=count($potongan); $i++)
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0"> 0</p>
+                                                <p class="text-center text-xs font-weight-bold mb-0"> 0</p>
                                             </td>
                                             @endfor
 
@@ -203,16 +201,7 @@
                                         {{--  <td class="align-middle text-center text-sm">
                                     <span class="badge badge-sm bg-gradient-success">Online</span>
                                 </td>  --}}
-                                        <td class="align-middle text-center  justify-content-center d-flex">
-                                            <!-- Button trigger modal -->
-                                            <a class="btn bg-gradient-success me-md-1" href="/tambah_absensi/{{$item->id}}/{{$bulan}}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                                                  </svg>
-                                            </a>
 
-
-                                        </td>
                                     </tr>
                                     @endforeach
 
