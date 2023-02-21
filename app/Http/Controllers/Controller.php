@@ -17,7 +17,7 @@ class Controller extends BaseController
         return view('admin.index');
     }
     public function home(){
-        return view('welcome');
+        return view('home');
     }
     public function login(){
 

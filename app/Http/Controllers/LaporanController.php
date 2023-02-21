@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Absensi;
 use App\Models\Jabatan;
 use App\Models\Potongan;
 use Illuminate\Http\Request;
@@ -137,7 +138,7 @@ class LaporanController extends Controller
     public function cetak_slipgaji($id,$bulan)
     {
 
-        
+
         $user = User::where('id',$id)->first();
 
         $pdf = PDF::loadview('admin.laporan.cetak_slipgaji',[
@@ -146,6 +147,43 @@ class LaporanController extends Controller
             'id' => $id,
         ]);
     	return $pdf->stream();
+    }
+
+    public function datagaji(){
+
+
+
+        $user = Absensi::where('user_id', auth()->user()->id)->get();
+
+        return view('gaji',[
+            'user' => $user,
+
+
+        ]);
+    }
+
+    public function pilihbulan(){
+
+        $user = User::where('id',auth()->user()->id)->first();
+
+        return view('pilihbulan',[
+            'user' => $user,
+
+
+
+        ]);
+    }
+    public function slipgaji_pegawai(Request $request){
+
+        $user = User::where('id',auth()->user()->id)->first();
+
+        return view('slipgaji',[
+            'bulan' => $request->bulan,
+            'id' => $request->pegawai,
+            'user' => $user,
+
+
+        ]);
     }
 
 }

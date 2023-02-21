@@ -25,7 +25,7 @@ use App\Http\Controllers\TunjanganController;
 //     return view('welcome');
 // });
 Route::get('/', [Controller::class, 'login']);
-Route::get('/home', [Controller::class, 'login']);
+Route::get('/home', [Controller::class, 'home']);
 Route::get('/login', [Controller::class, 'login']);
 Route::post('/login_aksi', [Controller::class, 'logins']);
 Route::post('/logout', [Controller::class, 'logout']);
@@ -88,4 +88,11 @@ Route::group(['middleware' => ['auth','admin']], function(){
     Route::post('/laporan_slipgajii', [LaporanController::class, 'slipgaji']);
     Route::get('/laporan_slipgaji_cetak/{id}/{bulan}', [LaporanController::class, 'cetak_slipgaji']);
 
+});
+
+Route::group(['middleware' => ['auth']], function(){
+Route::get('/data_gaji_pegawai', [LaporanController::class, 'datagaji']);
+Route::get('/slipgaji_pegawai', [LaporanController::class, 'pilihbulan']);
+Route::post('/slipgajii_pegawai', [LaporanController::class, 'slipgaji_pegawai']);
+Route::get('/slipgaji_cetak_pegawai/{id}/{bulan}', [LaporanController::class, 'cetak_slipgaji']);
 });

@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'tanggal_masuk' => '2020-06-06',
             'status' => 'Karyawan Tetap',
             'password' => Hash::make('password'),
-            'role' => 'admin'
+            'role' => 'pegawai'
         ]);
         DB::table('potongans')->insert([
             'nama_potongan' => 'Alpha',
