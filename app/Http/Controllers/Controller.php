@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,7 +18,11 @@ class Controller extends BaseController
         return view('admin.index');
     }
     public function home(){
-        return view('home');
+        $data = User::where('id', auth()->user()->id)->first();
+
+        return view('home',[
+            'data' => $data
+        ]);
     }
     public function login(){
 
