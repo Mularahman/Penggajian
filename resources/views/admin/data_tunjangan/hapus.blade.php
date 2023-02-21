@@ -7,11 +7,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/hapuspegawai/{{$item->id}}" method="post">
+        <form action="/hapustunjangan/{{$item->id}}" method="post">
             @csrf
             @method('DELETE')
 
-            <h5 for="example-text-input" class="form-control-label">Anda Yakin Ingin Menghapus Data Pegawai ?</h5>
+            <h5 for="example-text-input" class="form-control-label">Anda Yakin Ingin Menghapus Data Tunjangan ?</h5>
 
 
         <div class="modal-footer">

@@ -64,7 +64,7 @@
 
                 <div class="card-body px-2 py-2 pt-0 pb-0">
                     <div class="col px-3">
-                        <a href="{{ url()->previous() }}" class="btn bg-gradient-primary">
+                        <a href="/data_gaji" class="btn bg-gradient-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-arrow-left-circle-fill me-md-2" viewBox="0 0 16 16">
                                 <path
@@ -79,7 +79,7 @@
                         @csrf
 
                         <div class="px-4 py-4 pt-0">
-                            {{--
+{{--
                             <div class="row">
                                 <div class="col-md-6 px-3">
 
@@ -93,7 +93,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group align-items-center">
 
-                                        <input class="form-control" type="month" value="{{ date('Y') . '-' . date('m') }}"
+                                        <input class="form-control" type="month" value="{{$bulan}}"
                                             name="bulan" id="example-month-input">
                                     </div>
                                 </div>
@@ -144,11 +144,11 @@
                                         </div>
                                         <div class="col-3">
                                             <div class="text-left">
-                                                <p class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">: {{ $user->jabatan->nama_jabatan  }}</p>
+                                                <p class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">: {{ $bulan  }}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    {{--  <div class="row">
                                         <div class="col-3">
                                             <div class="text-left">
                                                 <p class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">Tahun</p>
@@ -159,7 +159,7 @@
                                                 <p class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">: {{ $user->jabatan->nama_jabatan  }}</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>  --}}
 
 
 
@@ -213,40 +213,63 @@
                                                 <p class=" font-weight-bold mb-0 text-xs">Gaji Pokok</p>
                                             </td>
                                             <td>
-                                                <p class="font-weight-bold mb-0 text-xs">{{ $user->jabatan->gaji_pokok }}</p>
+                                                <p class="font-weight-bold mb-0 text-xs">Rp. {{ $user->jabatan->gaji_pokok }}</p>
                                             </td>
                                         </tr>
                                         <tr>
+
                                             <td>
                                                 <p class="font-weight-bold mb-0 text-xs">2</p>
                                             </td>
                                             <td>
-                                                <p class="font-weight-bold mb-0 text-xs">Tunjangan Transport</p>
+                                                <p class="font-weight-bold mb-0 text-xs">  Tunjangan (
+                                                    @foreach ($user->gaji->where('bulan', $bulan)  as $gaji)
+                                                      {{$gaji->tunjangan->nama_tunjangan}},
+                                                    @endforeach
+                                                )
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="font-weight-bold mb-0 text-xs">3{{ $user->jabatan->tj_transport }}</p>
+                                                <p class="font-weight-bold mb-0 text-xs">
+
+
+                                                    @php
+                                                    $total = 0;
+                                                    foreach($user->gaji->where('bulan', $bulan)  as $gaji){
+
+                                                        $total += $gaji->tunjangan->jumlah_tunjangan ;
+                                                    }
+                                                    @endphp
+
+
+                                                    Rp. {{$total}}
+                                                </p>
                                             </td>
                                         </tr>
+
                                         <tr>
                                             <td>
                                                 <p class="font-weight-bold mb-0 text-xs">3</p>
                                             </td>
                                             <td>
-                                                <p class="font-weight-bold mb-0 text-xs">Uang Makan</p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-0 text-xs">{{ $user->jabatan->uang_makan }}</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="font-weight-bold mb-0 text-xs">4</p>
-                                            </td>
-                                            <td>
                                                 <p class="font-weight-bold mb-0 text-xs">Potongan</p>
                                             </td>
                                             <td>
-                                                <p class="font-weight-bold mb-0 text-xs">{{ $user->jabatan->gaji_pokok }}</p>
+                                                <p class="font-weight-bold mb-0 text-xs">
+                                                    @php
+                                                    $potongan = 0;
+                                                    foreach($user->absensi->where('bulan', $bulan)  as $absensi){
+                                                        foreach ($absensi->kehadiran as $kehadiran){
+
+                                                            $potongan += $kehadiran->jumlah*$kehadiran->potongan->jumlah_potongan ;
+                                                        }
+
+                                                    }
+                                                    @endphp
+
+
+                                                    Rp. {{$potongan}}
+                                                    </p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -257,7 +280,7 @@
                                                 <p class="font-weight-bold mb-0 text-xs">Total Gaji : </p>
                                             </td>
                                             <td>
-                                                <p class="font-weight-bold mb-0 text-xs">{{ $user->jabatan->gaji_pokok }}</p>
+                                                <p class="font-weight-bold mb-0 text-xs">Rp. {{ $user->jabatan->gaji_pokok + $total - $potongan }} </p>
                                             </td>
                                         </tr>
 

@@ -62,22 +62,22 @@
                         </div>
                         <div class="col">
 
-                            <form action="" method="post">
+                            <form action="/data_gajii" method="post">
                                 @csrf
 
                                 <div class="form-group">
 
-                                    <input class="form-control" type="month" value="{{ date('Y') . '-' . date('m') }}"
+                                    <input class="form-control" type="month" name="bulan" value="{{ date('Y') . '-' . date('m') }}"
                                         id="example-month-input">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
+                            </div>
+                            <div class="col">
+                                <!-- Button trigger modal -->
+                                <button type="submit" class="btn bg-gradient-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 <i class="fas fa-eye me-md-1"></i> Tampilkan Data
                             </button>
+                        </form>
 
                         </div>
 
@@ -90,18 +90,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col">
-                            {{--  <!-- Button trigger modal -->
-                        <a  class="btn bg-gradient-primary"   href="/tambah_absensi">
-                        Tambah Data
-                        </a>  --}}
-                        </div>
-                        <div class="col">
 
-
-                        </div>
-                    </div>
 
 
                 </div>
@@ -129,17 +118,10 @@
                                         Nama Pegawai
                                     </th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Jabatan</th>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Gaji Pokok</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Tj. Transport</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Uang Makan</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Potongan</th>
+
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Total Gaji</th>
@@ -169,25 +151,15 @@
 
 
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->nama_jabatan }}</p>
-
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->gaji_pokok }}</p>
-
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->tj_transport }}</p>
-
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->uang_makan }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->jabatan->nama_jabatan}}</p>
 
                                         </td>
 
 
 
-                                        @foreach ($item->absensi as $kehadiran)
+
+
+                                        {{--  @foreach ($item->absensi as $kehadiran)
                                             @foreach ($kehadiran->kehadiran as $hadir)
 
 
@@ -200,46 +172,43 @@
                                                 </td>
 
                                             @endforeach
-                                        @endforeach
+                                        @endforeach  --}}
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                                            <span class="badge badge-sm bg-gradient-success">
+
+                                                @php
+                                                $total = 0;
+                                                foreach($item->gaji->where('bulan', $bulan)  as $gaji){
+
+                                                    $total += $gaji->tunjangan->jumlah_tunjangan ;
+                                                }
+                                                $potongan = 0;
+                                                foreach($item->absensi->where('bulan', $bulan)  as $absensi){
+                                                    foreach ($absensi->kehadiran as $kehadiran){
+
+                                                        $potongan += $kehadiran->jumlah*$kehadiran->potongan->jumlah_potongan ;
+                                                    }
+
+                                                }
+                                                @endphp
+                                                Rp. {{ $item->jabatan->gaji_pokok + $total - $potongan }}
+                                            </span>
                                         </td>
                                         <td class="align-middle text-center  justify-content-center d-flex">
                                             <!-- Button trigger modal -->
                                             <a class="btn bg-gradient-primary me-md-1"
-                                                href="/lihat_gaji/{{ $item->id }}">
+                                                href="/lihat_gaji/{{ $item->id }}/{{$bulan}}">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            {{--  <!-- Button trigger modal -->
-                                            <button type="button" class="btn bg-gradient-info me-md-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $item->id }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
-                                                </svg>
-                                            </button>
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn bg-gradient-danger me-md-1"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal2{{ $item->id }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                </svg>
-                                            </button>
+                                            <a class="btn bg-gradient-success me-md-1"
+                                                href="/tambah_gaji/{{ $item->id }}/{{$bulan}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                                  </svg>
+                                            </a>
 
 
-
-
-                                            <div class="modal fade" id="exampleModal1{{ $item->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                @include('admin.data_absensi.edit')
-                                                <div class="modal fade" id="exampleModal2{{ $item->id }}"
-                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                    aria-hidden="true">
-                                                    @include('admin.data_absensi.hapus')  --}}
                                         </td>
                                     </tr>
                                 @endforeach

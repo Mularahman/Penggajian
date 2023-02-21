@@ -6,10 +6,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">Data Absensi</a></li>
-                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Data Absensi</li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">Data Gaji</a></li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tambah Tunjangan</li>
                 </ol>
-                <h6 class="font-weight-bolder text-white mb-0">Tambah Data Absensi</h6>
+                <h6 class="font-weight-bolder text-white mb-0">Tambah Tunjangan</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -63,7 +63,7 @@
 
                 <div class="card-body px-2 py-2 pt-0 pb-0">
                     <div class="col px-3">
-                        <a href="/data_absensi" class="btn bg-gradient-primary">
+                        <a href="{{ url()->previous() }}" class="btn bg-gradient-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-arrow-left-circle-fill me-md-2" viewBox="0 0 16 16">
                                 <path
@@ -74,7 +74,7 @@
                     </div>
 
 
-                    <form action="/tambahabsensi/{{$id}}" method="post">
+                    <form action="/tambah_gaji/{{$id}}" method="post">
                         @csrf
 
                         <div class="px-4 py-4 pt-0">
@@ -116,10 +116,10 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Jabatan</th>  --}}
-                                            @foreach ($potongan as $p)
+                                            @foreach ($tunjangan as $p)
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    {{ $p->nama_potongan }}</th>
+                                                    {{ $p->nama_tunjangan }}</th>
                                             @endforeach
 
 
@@ -127,7 +127,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($user as $item)
+                                        @foreach ($data as $item)
                                             <tr>
                                                 <td>
                                                     <p class="font-weight-bold mb-0">{{ $loop->iteration }}</p>
@@ -140,7 +140,7 @@
                                                     aria-label="Example text with button addon"
                                                     aria-describedby="button-addon1">
                                                 </td>
-                                                @foreach ($potongan as $p)
+                                                @foreach ($tunjangan as $p)
                                                     <td>
                                                         <div class="d-flex justify-content-center px-2 py-1">
 
@@ -148,13 +148,18 @@
 
 
                                                                 {{--  <div class="input-group mb-3">  --}}
+                                                                    <div class="form-check">
 
-                                                                <input type="number" class="form-control"
-                                                                    style="width: 80px;" name="a[][{{$p->id}}]"
-                                                                    aria-label="Example text with button addon"
-                                                                    aria-describedby="button-addon1"
-                                                                    
-                                                                    >
+                                                                        <input type="checkbox" class="form-check-input" value="{{$p->id}}" name="tunjangan_id[]" id="customCheckDisabled"
+                                                                        @foreach ($item->gaji->where('bulan', $bulan) as $gaji )
+                                                                        @if ($gaji->tunjangan_id == $p->id)
+                                                                        checked
+
+                                                                        @endif
+                                                                        @endforeach
+                                                                        >
+
+                                                                      </div>
 
                                                                 {{--  </div>  --}}
 

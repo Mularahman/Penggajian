@@ -19,14 +19,12 @@ class DatabaseSeeder extends Seeder
         DB::table('jabatans')->insert([
             'nama_jabatan' => 'Admin',
             'gaji_pokok' => '20000',
-            'tj_transport' => '20000',
-            'uang_makan' => '2000',
+
         ]);
         DB::table('jabatans')->insert([
             'nama_jabatan' => 'HRD',
             'gaji_pokok' => '50000',
-            'tj_transport' => '40000',
-            'uang_makan' => '2000',
+
         ]);
         DB::table('users')->insert([
             'nik' => '123222345',
@@ -50,13 +48,21 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('potongans')->insert([
             'nama_potongan' => 'Alpha',
-            'jumlah_potongan' => '10000',
+            'jumlah_potongan' => '100',
 
         ]);
         DB::table('potongans')->insert([
             'nama_potongan' => 'Sakit',
-            'jumlah_potongan' => '5000',
+            'jumlah_potongan' => '50',
 
+        ]);
+        DB::table('tunjangans')->insert([
+            'nama_tunjangan' => 'Uang Makan',
+            'jumlah_tunjangan' => '500',
+        ]);
+        DB::table('tunjangans')->insert([
+            'nama_tunjangan' => 'Tj Transport',
+            'jumlah_tunjangan' => '300',
         ]);
     }
 }

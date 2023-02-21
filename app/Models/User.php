@@ -24,6 +24,9 @@ class User extends Authenticatable
     // ];
     protected $guarded = ['id'];
 
+    public function gaji(){
+        return $this->hasMany(Gaji::class);
+       }
     public function jabatan(){
         return $this->belongsTo(Jabatan::class);
        }

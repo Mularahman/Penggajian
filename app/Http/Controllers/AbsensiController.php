@@ -12,18 +12,36 @@ class AbsensiController extends Controller
 {
     public function index()
     {
+        $bulan = date('Y') . '-' . date('m');
+        $user = User::with('absensi','jabatan','absensi.kehadiran')->get();
+
+        $potongan = Potongan::all();
+
+        return view('admin.data_absensi.absensi',[
+
+            'user' => $user,
+            'bulan' => $bulan,
+
+            'potongan' => $potongan,
+        ]);
+    }
+    public function filter(Request $request)
+    {
+
         $user = User::with('absensi','jabatan','absensi.kehadiran')->get();
 
 
         $potongan = Potongan::all();
-        
-        return view('admin.data_absensi.absensi',[
 
+        return view('admin.data_absensi.absensii',[
+
+
+            'bulan' => $request->bulan,
             'user' => $user,
             'potongan' => $potongan,
         ]);
     }
-    public function tambah($id)
+    public function tambah($id,$bulan)
     {
 
         $user = User::where('id', $id)->get();
@@ -32,6 +50,7 @@ class AbsensiController extends Controller
             'id' => $id,
             'potongan' => $potongan,
             'user' => $user,
+            'bulan' => $bulan,
         ]);
     }
 
@@ -107,6 +126,7 @@ class AbsensiController extends Controller
                         'absensi_id' => $idkehadiran,
                         'potongan_id' => $key,
                         'jumlah' => $da,
+                        'bulan' => $data['bulan'],
                     ]);
 
                 }

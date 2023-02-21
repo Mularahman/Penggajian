@@ -41,8 +41,7 @@ class JabatanController extends Controller
         $data = $this->validate($request,[
             'nama_jabatan' => 'required',
             'gaji_pokok' => 'required',
-            'tj_transport' => 'required',
-            'uang_makan' => 'required',
+
 
         ]);
 
@@ -50,8 +49,7 @@ class JabatanController extends Controller
         Jabatan::create([
             'nama_jabatan' => $data['nama_jabatan'],
             'gaji_pokok' => $data['gaji_pokok'],
-            'tj_transport' => $data['tj_transport'],
-            'uang_makan' => $data['uang_makan'],
+
 
         ]);
 
@@ -94,8 +92,7 @@ class JabatanController extends Controller
         $data = $this->validate($request, [
             'nama_jabatan' => 'required',
             'gaji_pokok' => 'required',
-            'tj_transport' => 'required',
-            'uang_makan' => 'required',
+            
          ]);
          $d = Jabatan::FindOrfail($id);
          $d->update($data);

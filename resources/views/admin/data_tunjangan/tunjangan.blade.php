@@ -7,9 +7,9 @@ data-scroll="false">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
                     href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Jenis Potongan</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data Tunjangan</li>
         </ol>
-        <h6 class="font-weight-bolder text-white mb-0">Jenis Potongan</h6>
+        <h6 class="font-weight-bolder text-white mb-0">Data Tunjangan</h6>
     </nav>
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -94,9 +94,9 @@ data-scroll="false">
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama Potongan
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama Tunjangan
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah Potongan
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah Tunjangan
                                 </th>
 
 
@@ -114,14 +114,14 @@ data-scroll="false">
 
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{$item->nama_potongan}}</p>
+                                    <p class="text-xs font-weight-bold mb-0">{{$item->nama_tunjangan}}</p>
 
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
 
 
-                                        <p class="text-xs font-weight-bold mb-0">Rp. {{$item->jumlah_potongan}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">Rp. {{$item->jumlah_tunjangan}}</p>
 
                                     </div>
                                 </td>
@@ -150,9 +150,9 @@ data-scroll="false">
 
 
                                     <div class="modal fade" id="exampleModal1{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        @include('admin.data_potongan.edit')
+                                        @include('admin.data_tunjangan.edit')
                                     <div class="modal fade" id="exampleModal2{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        @include('admin.data_potongan.hapus')
+                                        @include('admin.data_tunjangan.hapus')
                                 </td>
                             </tr>
                             @endforeach
@@ -169,26 +169,26 @@ data-scroll="false">
 <div class="modal-dialog modal-dialog-centered" role="document">
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Potongan</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Tunjangan</h5>
     <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form action="/tambahpotongan" method="post">
+    <form action="/tambahtunjangan" method="post">
     @csrf
 
-        <label for="example-text-input" class="form-control-label">Nama Potongan</label>
+        <label for="example-text-input" class="form-control-label">Nama Tunjangan</label>
         <div class="input-group mb-3">
 
-            <input type="text" class="form-control "  name="nama_potongan" placeholder="Enter Nama Potongan" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="text" class="form-control "  name="nama_tunjangan" placeholder="Enter Nama Tunjangan" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
         </div>
 
-        <label for="example-text-input" class="form-control-label">Jumlah Potongan</label>
+        <label for="example-text-input" class="form-control-label">Jumlah Tunjangan</label>
         <div class="input-group mb-3">
 
-            <input type="number" class="form-control "  name="jumlah_potongan" placeholder="Enter Jumlah Potongan" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="number" class="form-control "  name="jumlah_tunjangan" placeholder="Enter Jumlah Tunjangan" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
         </div>
 

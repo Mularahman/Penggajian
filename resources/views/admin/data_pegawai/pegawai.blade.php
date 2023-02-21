@@ -94,7 +94,7 @@ data-scroll="false">
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NIK
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NIP
                                 </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Pegawai
                                 </th>
@@ -203,10 +203,10 @@ data-scroll="false">
     <form action="/tambahpegawai" method="post">
     @csrf
 
-        <label for="example-text-input" class="form-control-label">NIK</label>
+        <label for="example-text-input" class="form-control-label">NIP</label>
         <div class="input-group mb-3">
 
-            <input type="number" class="form-control "  name="nik" placeholder="Enter NIK" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="number" class="form-control "  name="nik" placeholder="Enter NIP" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
         </div>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PotonganController;
+use App\Http\Controllers\TunjanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,8 @@ use App\Http\Controllers\PotonganController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [Controller::class, 'home']);
-Route::get('/home', [Controller::class, 'home']);
+Route::get('/', [Controller::class, 'login']);
+Route::get('/home', [Controller::class, 'login']);
 Route::get('/login', [Controller::class, 'login']);
 Route::post('/login_aksi', [Controller::class, 'logins']);
 Route::post('/logout', [Controller::class, 'logout']);
@@ -45,6 +46,12 @@ Route::group(['middleware' => ['auth','admin']], function(){
     Route::put('/updatejabatan/{id}', [JabatanController::class,'update']);
     Route::delete('/hapusjabatan/{id}', [JabatanController::class,'destroy']);
 
+    Route::get('/data_tunjangan', [TunjanganController::class, 'index']);
+    Route::post('/tambahtunjangan', [TunjanganController::class, 'store']);
+    Route::post('/edittunjangan/{id}', [TunjanganController::class,'edit']);
+    Route::put('/updatetunjangan/{id}', [TunjanganController::class,'update']);
+    Route::delete('/hapustunjangan/{id}', [TunjanganController::class,'destroy']);
+
     Route::get('/jenis_potongan', [PotonganController::class, 'index']);
     Route::post('/tambahpotongan', [PotonganController::class, 'store']);
     Route::post('/editpotongan/{id}', [PotonganController::class,'edit']);
@@ -52,13 +59,17 @@ Route::group(['middleware' => ['auth','admin']], function(){
     Route::delete('/hapuspotongan/{id}', [PotonganController::class,'destroy']);
 
     Route::get('/data_absensi', [AbsensiController::class, 'index']);
-    Route::get('/tambah_absensi/{id}', [AbsensiController::class, 'tambah']);
+    Route::post('/data_absensii', [AbsensiController::class, 'filter']);
+    Route::get('/tambah_absensi/{id}/{bulan}', [AbsensiController::class, 'tambah']);
     Route::post('/tambahabsensi/{id}', [AbsensiController::class, 'store']);
     Route::post('/editabsensi/{id}', [AbsensiController::class,'edit']);
     Route::put('/updateabsensi/{id}', [AbsensiController::class,'update']);
     Route::delete('/hapusabsensi/{id}', [AbsensiController::class,'destroy']);
 
     Route::get('/data_gaji', [GajiController::class, 'index']);
-    Route::get('/lihat_gaji/{id}', [GajiController::class, 'lihat']);
+    Route::post('/data_gajii', [GajiController::class, 'filter']);
+    Route::get('/tambah_gaji/{id}/{bulan}', [GajiController::class, 'tambah']);
+    Route::post('/tambah_gaji/{id}', [GajiController::class, 'store']);
+    Route::get('/lihat_gaji/{id}/{bulan}', [GajiController::class, 'lihat']);
 
 });

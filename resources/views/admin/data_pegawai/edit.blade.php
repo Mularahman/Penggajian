@@ -14,10 +14,10 @@
         @method('PUT')
 
 
-        <label for="example-text-input" class="form-control-label" >NIK</label>
+        <label for="example-text-input" class="form-control-label" >NIP</label>
         <div class="input-group mb-3">
 
-            <input type="number" class="form-control " value="{{$item->nik}}"  name="nik" placeholder="Enter NIK" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="number" class="form-control " value="{{$item->nik}}"  name="nik" placeholder="Enter NIP" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
         </div>
 

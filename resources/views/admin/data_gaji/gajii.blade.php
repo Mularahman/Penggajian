@@ -6,9 +6,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data Absensi</li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Data Gaji</li>
                 </ol>
-                <h6 class="font-weight-bolder text-white mb-0">Data Absensi</h6>
+                <h6 class="font-weight-bolder text-white mb-0">Data Gaji</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -57,17 +57,17 @@
                     <div class="row">
                         <div class="col-6">
                             <p for="example-month-input"
-                                class=" text-uppercase text-secondary  font-weight-bolder opacity-30">Filter Data Absensi
+                                class=" text-uppercase text-secondary  font-weight-bolder opacity-30">Filter Data Gaji
                                 Pegawai</p>
                         </div>
                         <div class="col">
 
-                            <form action="/data_absensii" method="post">
+                            <form action="/data_gajii" method="post">
                                 @csrf
 
                                 <div class="form-group">
 
-                                    <input class="form-control" type="month" name="bulan" value="{{ date('Y') . '-' . date('m') }}"
+                                    <input class="form-control" type="month" name="bulan" value="{{$bulan}}"
                                         id="example-month-input">
                                 </div>
                             </div>
@@ -90,18 +90,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col">
-                            {{--  <!-- Button trigger modal -->
-                        <a  class="btn bg-gradient-primary"   href="/tambah_absensi">
-                        Tambah Data
-                        </a>  --}}
-                        </div>
-                        <div class="col">
 
-
-                        </div>
-                    </div>
 
 
                 </div>
@@ -128,16 +117,14 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Nama Pegawai
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Jenis Kelamin</th>
+                                    <th
+                                        class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Jabatan</th>
+
+
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Jabatan</th>
-                                    @foreach ($potongan as $p)
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            {{ $p->nama_potongan }}</th>
-                                    @endforeach
+                                        Total Gaji</th>
 
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -147,7 +134,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($user as $item)
-                                <tr>
+                                    <tr>
 
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p>
@@ -161,60 +148,70 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
 
                                         </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jenis_kelamin }}</p>
 
-                                        </td>
+
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jabatan->nama_jabatan }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->jabatan->nama_jabatan}}</p>
 
                                         </td>
 
 
-                                            @forelse ($item->absensi->where('bulan', $bulan) as $absensi)
-
-                                            @forelse ($absensi->kehadiran->where('bulan', $bulan) as $kehadiran)
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0"> {{ $kehadiran->jumlah }}</p>
-                                            </td>
-                                            @empty
-
-                                            @for ($i=1; $i<=count($potongan); $i++)
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0"> 0</p>
-                                            </td>
-                                            @endfor
-
-                                            @endforelse
-                                            @empty
-                                            @for ($i=1; $i<=count($potongan); $i++)
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0"> 0</p>
-                                            </td>
-                                            @endfor
-
-                                            @endforelse
 
 
 
+                                        {{--  @foreach ($item->absensi as $kehadiran)
+                                            @foreach ($kehadiran->kehadiran as $hadir)
 
 
 
+                                                <td class="align-middle text-center text-sm">
+                                                    <span
+                                                        class="badge badge-sm bg-gradient-danger">
 
-                                        {{--  <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>  --}}
+                                                        {{ $hadir->sum('jumlah') * $hadir->potongan->sum('jumlah_potongan') }} </span>
+                                                </td>
+
+                                            @endforeach
+                                        @endforeach  --}}
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-success">
+
+                                                @php
+                                                $total = 0;
+                                                foreach($item->gaji->where('bulan', $bulan)  as $gaji){
+
+                                                    $total += $gaji->tunjangan->jumlah_tunjangan ;
+                                                }
+                                                $potongan = 0;
+                                                foreach($item->absensi->where('bulan', $bulan)  as $absensi){
+                                                    foreach ($absensi->kehadiran as $kehadiran){
+
+                                                        $potongan += $kehadiran->jumlah*$kehadiran->potongan->jumlah_potongan ;
+                                                    }
+
+                                                }
+                                                @endphp
+                                                Rp. {{ $item->jabatan->gaji_pokok + $total - $potongan }}
+                                            </span>
+                                        </td>
                                         <td class="align-middle text-center  justify-content-center d-flex">
                                             <!-- Button trigger modal -->
-                                            <a class="btn bg-gradient-success me-md-1" href="/tambah_absensi/{{$item->id}}/{{$bulan}}">
+                                            <a class="btn bg-gradient-primary me-md-1"
+                                                href="/lihat_gaji/{{ $item->id }}/{{$bulan}}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <!-- Button trigger modal -->
+                                            <a class="btn bg-gradient-success me-md-1"
+                                                href="/tambah_gaji/{{ $item->id }}/{{$bulan}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                                   </svg>
                                             </a>
 
+
                                         </td>
                                     </tr>
-                                    @endforeach
+                                @endforeach
 
 
                             </tbody>

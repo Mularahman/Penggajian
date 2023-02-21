@@ -19,7 +19,7 @@ class CreateKehadiransTable extends Migration
             $table->foreignId('absensi_id');
             $table->foreignId('potongan_id');
             $table->integer('jumlah');
-
+            $table->string('bulan');
             $table->foreign('absensi_id')->references('id')->on('absensis')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('potongan_id')->references('id')->on('potongans')->onDelete('cascade')->onUpdate('cascade');
         });

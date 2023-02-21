@@ -98,11 +98,7 @@ data-scroll="false">
                                 </th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gaji Pokok
                                 </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Tunjanagan Transport</th>
-                                <th
-                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Uang Makan</th>
+
 
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -125,18 +121,11 @@ data-scroll="false">
                                     <div class="d-flex px-2 py-1">
 
 
-                                        <p class="text-xs font-weight-bold mb-0">{{$item->gaji_pokok}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">Rp. {{$item->gaji_pokok}}</p>
 
                                     </div>
                                 </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{$item->tj_transport}}</p>
 
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{$item->uang_makan}}</p>
-
-                                </td>
 
 
                                 {{--  <td class="align-middle text-center text-sm">
@@ -202,25 +191,6 @@ data-scroll="false">
             <input type="number" class="form-control "  name="gaji_pokok" placeholder="Enter Gaji Pokok" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
         </div>
-        <label for="example-text-input" class="form-control-label">Tunjangan Transport</label>
-        <div class="input-group mb-3">
-
-            <input type="number" class="form-control "  name="tj_transport" placeholder="Enter Tunjangan Transport" aria-label="Example text with button addon" aria-describedby="button-addon1">
-
-        </div>
-        <label for="example-text-input" class="form-control-label">Uang Makan</label>
-        <div class="input-group mb-3">
-
-            <input type="number" class="form-control "  name="uang_makan" placeholder="Enter Uang Makan" aria-label="Example text with button addon" aria-describedby="button-addon1">
-
-        </div>
-
-
-
-
-
-
-
 
 
 
