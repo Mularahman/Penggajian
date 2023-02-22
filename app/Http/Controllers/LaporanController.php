@@ -6,8 +6,11 @@ use App\Models\User;
 use App\Models\Absensi;
 use App\Models\Jabatan;
 use App\Models\Potongan;
+use App\Charts\JenissChart;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\PDF;
+use App\Charts\MonthlyUsersChart;
+use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -185,5 +188,14 @@ class LaporanController extends Controller
 
         ]);
     }
+
+    public function grafik(MonthlyUsersChart $chart, JenissChart $charts)
+{
+    return view('admin.laporan.grafik', [
+        'chart' => $chart->build(),
+        'charts' => $charts->build(),
+    ]);
+}
+
 
 }

@@ -46,7 +46,7 @@ data-scroll="false">
             </li>
 
         </ul>
-        
+
     </div>
 </div>
 </nav>
@@ -59,20 +59,17 @@ data-scroll="false">
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Todays Money</p>
+                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Data Pegawai</p>
                             <h5 class="font-weight-bolder">
-                                $53,000
+                                {{Count($data)}}
                             </h5>
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                since yesterday
-                            </p>
+
                         </div>
                     </div>
                     <div class="col-4 text-end">
                         <div
                             class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                            <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                            <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -85,20 +82,17 @@ data-scroll="false">
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Todays Users</p>
+                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Data Jabatan</p>
                             <h5 class="font-weight-bolder">
-                                2,300
+                                {{Count($jabatan)}}
                             </h5>
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                since last week
-                            </p>
+
                         </div>
                     </div>
                     <div class="col-4 text-end">
                         <div
                             class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                            <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                            <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -111,20 +105,17 @@ data-scroll="false">
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Tunjangan</p>
                             <h5 class="font-weight-bolder">
-                                +3,462
+                                {{Count($absensi)}}
                             </h5>
-                            <p class="mb-0">
-                                <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                since last quarter
-                            </p>
+
                         </div>
                     </div>
                     <div class="col-4 text-end">
                         <div
                             class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                            <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                            <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -137,20 +128,17 @@ data-scroll="false">
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Potongan</p>
                             <h5 class="font-weight-bolder">
-                                $103,430
+                               {{Count($gaji)}}
                             </h5>
-                            <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">+5%</span> than last
-                                month
-                            </p>
+
                         </div>
                     </div>
                     <div class="col-4 text-end">
                         <div
                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                            <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                            <i class="ni ni-scissors text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -162,27 +150,33 @@ data-scroll="false">
     <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card z-index-2 h-100">
             <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Sales overview</h6>
-                <p class="text-sm mb-0">
-                    <i class="fa fa-arrow-up text-success"></i>
-                    <span class="font-weight-bold">4% more</span> in 2021
-                </p>
+                <h6 class="text-capitalize">Misi</h6>
+
             </div>
-            <div class="card-body p-3">
-                <div class="chart">
-                    <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+            <div class="card-body p-3 text-center">
+                   <p><span>1. </span> Mencegah, Mengendalikan dan Pemulihan Pencemaran Air, Udara, dan Tanah Serta Mendukung Terpeliharanya Kelestarian Fungsi lingkungan Hidup.</li>
+                   </p>
+
+                   <p><span>2. </span> Mengembangkan Sistem data dan Informasi Kondisi Lingkungan Hidup.</li>
+                   </p>
+
+                   <p><span>3. </span> Menciptakan Kota Banjarmasin yang Bersih, Indah dan Nyaman Serta Terbangunnya Taman-Taman Kota dan Ruang Terbuka Hijau.</li>
+                   </p>
+
+                   <p><span>4. </span> Pengembangkan Kapasitas Sumberdaya Manusia yang Berwawasan Lingkungan. </li>
+                   </p>
+
                 </div>
-            </div>
         </div>
     </div>
     <div class="col-lg-5">
         <div class="card mb-3">
-            <div class="card-body p-3">
-              <div class="chart">
-                <canvas id="pie-chart" class="chart-canvas" height="300px">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+                <h6 class="text-capitalize">Misi</h6>
 
-                </canvas>
-              </div>
+            </div>
+            <div class="card-body p-3 text-center">
+             <span>"Terwujudnya Pembangunan Yang Berkelanjutan Dan Berwawasan Lingkungan Hidup Menuju Banjarmasin Bersih, Indah Dan Nyaman"</span>
             </div>
           </div>
     </div>

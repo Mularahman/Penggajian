@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gaji;
 use App\Models\User;
+use App\Models\Absensi;
+use App\Models\Jabatan;
+use App\Models\Potongan;
+use App\Models\Tunjangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -15,13 +20,24 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){
-        return view('admin.index');
+        $data = User::all();
+        $jabatan = Jabatan::all();
+        $Absensi = Tunjangan::all();
+        $Gaji = Potongan::all();
+        return view('admin.index',[
+            'data' => $data,
+            'jabatan' => $jabatan,
+            'absensi' => $Absensi,
+            'gaji' => $Gaji,
+        ]);
     }
     public function home(){
         $data = User::where('id', auth()->user()->id)->first();
 
+
         return view('home',[
-            'data' => $data
+            'data' => $data,
+
         ]);
     }
     public function login(){

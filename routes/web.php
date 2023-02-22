@@ -88,6 +88,9 @@ Route::group(['middleware' => ['auth','admin']], function(){
     Route::post('/laporan_slipgajii', [LaporanController::class, 'slipgaji']);
     Route::get('/laporan_slipgaji_cetak/{id}/{bulan}', [LaporanController::class, 'cetak_slipgaji']);
 
+    Route::get('/laporan_grafik', [LaporanController::class, 'grafik']);
+
+
 });
 
 Route::group(['middleware' => ['auth']], function(){
